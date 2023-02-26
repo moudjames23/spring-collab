@@ -1,18 +1,12 @@
-name: Build Spring-Collab
-
+name: Actions spring-collab
 on:
-  push:
-    branches: ["main"]
-
-
+  - push
 jobs:
-  Build:
+  Mkdocs-project:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-      - uses: actions/checkout@v3.3.0
-      - name: List directories
-      - run: "ls -l"
+      - name: "Clone repository"
+        uses: actions/checkout@v3
 
-
+      - name: "List repository files"
+        run: "ls -al"
