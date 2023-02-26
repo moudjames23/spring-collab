@@ -18,5 +18,5 @@ jobs:
           distribution: 'adopt'
           cache: maven
       - name: Setup maven
-        run: mvn clean install
+        run: mvn install
           
