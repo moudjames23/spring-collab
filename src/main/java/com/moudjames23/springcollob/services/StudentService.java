@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +35,11 @@ public class StudentService {
 
     public StudentDto create(StudentDto studentDto)
     {
-        this.studentRepository.findByEmail(studentDto.getEmail())
-                .orElseThrow(() -> new ResourceAlreadyExistException("This mail "+studentDto.getEmail()+"  is already exists"));
+        Optional<Student> optionStudent = this.studentRepository.findByEmail(studentDto.getEmail());
+
+        if (optionStudent.isPresent())
+            throw new ResourceAlreadyExistException("This mail "+studentDto.getEmail()+"  is already exists");
+
 
         Student student = this.studentRepository.save(modelMapper.map(studentDto, Student.class));
 

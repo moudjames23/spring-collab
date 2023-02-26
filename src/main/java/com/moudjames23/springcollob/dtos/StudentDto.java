@@ -1,8 +1,6 @@
 package com.moudjames23.springcollob.dtos;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,11 +14,16 @@ public class StudentDto {
 
     private long id;
 
-    @NotBlank(message = "Le nom de l'étudiant est obligatoire")
+    @NotBlank(message = "student's name is required")
     @Size(min = 5, max = 200)
     private String name;
 
-    @NotBlank(message = "L'adresse email de l'étudiant est obligatoire")
+    @NotBlank(message = "Student'mail is required")
     @Email
     private String email;
+
+    @NotNull(message =  "Student's age is required")
+    @Min(10)
+    @Max(70)
+    private int age;
 }
