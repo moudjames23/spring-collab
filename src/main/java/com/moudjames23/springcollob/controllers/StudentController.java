@@ -14,6 +14,7 @@ import static com.moudjames23.springcollob.config.MyHttpResponse.response;
 
 @RestController
 @RequestMapping("/api/v1/students")
+@CrossOrigin("*")
 public class StudentController {
 
     private final StudentService studentService;

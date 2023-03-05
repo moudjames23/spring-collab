@@ -70,6 +70,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>spring-collab</finalName>
     </build>
 
 </project>
