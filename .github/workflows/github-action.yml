@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: login and push
       run: |
-        docker login -u {{ secrets.DOCKER_USERNAME }} -p {{ secrets.DOCKER_PASSWORD }}
+        docker login https://reegistry-1.docker.io/v2/ -u {{ secrets.DOCKER_USERNAME }} -p {{ secrets.DOCKER_PASSWORD }}
         docker build -t moudjames23/spring-collab:latest .
         docker push moudjames23/spring-collab:latest
     
