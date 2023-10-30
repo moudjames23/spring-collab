@@ -12,10 +12,15 @@ jobs:
         java-version: '17'
         distribution: 'adopt'
         cache: maven
-    - name: java version
-      run: java -version
+   
     - name: Build with Maven
       run: mvn clean install
+
+    - name: Setup Trivy
+      run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
+      if: success()
+
     
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
