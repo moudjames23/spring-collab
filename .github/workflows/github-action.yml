@@ -46,6 +46,6 @@ jobs:
         name: security-reports
         path: |
           dockerfile_security_scan.json
-          repo_security_scan.json
-          dockerimage_security_scan
+          repo_security_scan.json.json
+          dockerimage_security_scan.json
           
