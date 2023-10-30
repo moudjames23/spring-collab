@@ -22,10 +22,10 @@ jobs:
       if: success()
 
     - name: Dockerfile scan
-      run: trivy config --severity HIGH,CRITICAL Dockerfile
+      run: trivy config --severity HIGH,CRITICAL Dockerfile --format json > dockerfile_security_scan.json
 
     - name: Repo scan
-      run: trivy repo --severity HIGH,CRITICAL --dependency-tree .
+      run: trivy repo --severity HIGH,CRITICAL --dependency-tree . --format json > repo_security_scan.json
     
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
@@ -38,5 +38,14 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Scan Docker image
-      run: trivy image --severity HIGH,CRITICAL moudjames23/spring-collab
+      run: trivy image --severity HIGH,CRITICAL moudjames23/spring-collab --format json > dockerimage_security_scan.json
+
+    - name: Upload Security Scan Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: security-reports
+        path: |
+          dockerfile_security_scan.json
+          repo_security_scan.json
+          dockerimage_security_scan
           
