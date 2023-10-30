@@ -21,6 +21,11 @@ jobs:
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin
       if: success()
 
+    - name: Dockerfile scan
+      run: trivy config --severity HIGH,CRITICAL Dockerfile
+
+    - name: Repo scan
+      run: trivy repo --severity HIGH,CRITICAL --dependency-tree .
     
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
@@ -31,5 +36,7 @@ jobs:
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-    
+
+    - name: Scan Docker image
+      run: trivy image --severity HIGH,CRITICAL moudjames23/spring-collab
           
